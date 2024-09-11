@@ -3,7 +3,7 @@ package dev.muon.medievalorigins.action;
 
 import dev.muon.medievalorigins.MedievalOrigins;
 import io.github.apace100.apoli.data.ApoliDataTypes;
-import io.github.apace100.apoli.power.factory.action.ActionFactory;
+import io.github.apace100.apoli.action.factory.ActionTypeFactory;
 import io.github.apace100.apoli.util.MiscUtil;
 import io.github.apace100.calio.data.SerializableData;
 import io.github.apace100.calio.data.SerializableDataType;
@@ -25,12 +25,11 @@ public class AttributedDamageAction {
     public AttributedDamageAction() {
     }
 
-    public static ActionFactory<Tuple<Entity, Entity>> getFactory() {
-        return new ActionFactory<>(MedievalOrigins.loc("damage"),
+    public static ActionTypeFactory<Tuple<Entity, Entity>> getFactory() {
+        return new ActionTypeFactory<>(MedievalOrigins.loc("damage"),
                 new SerializableData()
                         .add("base", SerializableDataTypes.FLOAT)
                         .add("modifier", SerializableDataType.compound(SerializableData.Instance.class, modifierData, Function.identity(), (data, instance) -> instance), null)
-                        .add("source", ApoliDataTypes.DAMAGE_SOURCE_DESCRIPTION, null)
                         .add("damage_type", SerializableDataTypes.DAMAGE_TYPE, null),
                 AttributedDamageAction::action);
     }
