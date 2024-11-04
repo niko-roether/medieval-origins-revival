@@ -4,8 +4,6 @@ plugins {
     id 'fabric-loom'
     id 'maven-publish'
     id 'idea'
-    id "net.darkhax.curseforgegradle" version "1.0.7"
-    id "com.modrinth.minotaur" version "2.+"
 }
 
 archivesBaseName = "${mod_name}"
@@ -13,13 +11,16 @@ version = "${rootProject.version}+${minecraft_version}-fabric"
 
 
 loom {
-    mixin.defaultRefmapName = "medievalorigins.refmap.json"
-
 	mods {
 		"medievalorigins" {
 			sourceSet sourceSets.main
 		}
 	}
+
+    mixin {
+        useLegacyMixinAp = false
+		defaultRefmapName = "medievalorigins.refmap.json"
+    }
 
     runs {
         client {
@@ -144,11 +145,9 @@ dependencies {
     */
 }
 
-jar {}
 
 processResources {
-    from project(":Common").sourceSets.main.resources
-    exclude "medievalorigins.common.accesswidener"
+    sourceSets.main.resources
 
     inputs.property "version", project.version
 
@@ -159,13 +158,14 @@ processResources {
 
 processTestResources {
     outputs.upToDateWhen { false }
-    from project(":Common").sourceSets.test.resources
+    sourceSets.test.resources
 }
 
 tasks.withType(JavaCompile) {
-    source(project(":Common").sourceSets.main.allSource)
+    sourceSets.main.allSource
 }
 
+/*
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -191,8 +191,10 @@ publishing {
         mavenLocal()
     }
 }
+*/
 
 
+/*
 modrinth {
     token = System.getenv("MODRINTH_TOKEN")
     projectId = "medieval-origins-revival"
@@ -221,3 +223,4 @@ task publishCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge)
     mainFile.displayName = "Fabric-${rootProject.version}+${minecraft_version}"
     mainFile.addRequirement("origins")
 }
+*/
