@@ -21,10 +21,6 @@ repositories {
         name = "JitPack"
         url = 'https://jitpack.io'
     }
-    maven {
-        name = 'ParchmentMC'
-        url = 'https://maven.parchmentmc.org'
-    }
     maven { url = 'https://maven.ladysnake.org/snapshots' }
     mavenCentral()
     mavenLocal()
@@ -38,13 +34,6 @@ loom {
 }
 
 dependencies {
-    // Minecraft
-    minecraft "com.mojang:minecraft:${minecraft_version}"
-    mappings loom.layered() {
-        officialMojangMappings()
-        parchment("org.parchmentmc.data:parchment-${minecraft_version}:${parchment_version}@zip")
-    }
-
     // Origins
     //modCompileOnly("com.github.apace100:calio:${calio_fabric_version}") { transitive false }
     modCompileOnly("io.github.apace100:apoli:${apoli_fabric_version}") { transitive false }
